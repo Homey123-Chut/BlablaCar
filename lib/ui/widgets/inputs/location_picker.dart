@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:week_3_blabla_project/model/ride_pref/ride_pref.dart';
 import '../../../model/ride/locations.dart';
 import '../../../data/dummy_data.dart';
 
 class LocationPicker extends StatefulWidget {
   final Location? selectedLocation;
-  final Function(Location) onLocationSelected;
 
   const LocationPicker({
     super.key,
     this.selectedLocation,
-    required this.onLocationSelected,
   });
 
   @override
@@ -51,8 +50,8 @@ class _LocationPickerState extends State<LocationPicker> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Column(
+    return Scaffold(
+      body: Column(
         children: [
           const SizedBox(height: 12),
 
@@ -97,8 +96,7 @@ class _LocationPickerState extends State<LocationPicker> {
                       ? const Icon(Icons.check, color: Colors.blue)
                       : const Icon(Icons.chevron_right, color: Colors.grey),
                   onTap: () {
-                    widget.onLocationSelected(location);
-                    Navigator.pop(context);
+                    Navigator.pop(context, location);
                   },
                 );
               },
@@ -109,3 +107,6 @@ class _LocationPickerState extends State<LocationPicker> {
     );
   }
 }
+
+
+         
