@@ -28,6 +28,8 @@ class Ride {
 
   final List<User> passengers = [];
 
+  var departure;
+
   Ride({
     required this.departureLocation,
     required this.departureDate,
