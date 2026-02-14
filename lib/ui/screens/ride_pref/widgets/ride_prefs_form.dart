@@ -118,7 +118,7 @@ class _RidePrefFormState extends State<RidePrefForm> {
     });
   }
   // ----------------------------------
-// ----------------------------------
+  // ----------------------------------
   // Compute the widgets rendering
   // ----------------------------------
   String get departureLabel => departure != null ? departure!.name : "From";
