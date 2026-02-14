@@ -40,19 +40,23 @@ class _RidePrefFormState extends State<RidePrefForm> {
   // Initialize the Form attributes
   // ----------------------------------
 
-  @override
+   @override
   void initState() {
     super.initState();
+
     if (widget.initRidePref != null) {
-      departure = widget.initRidePref?.departure;
-      arrival = widget.initRidePref?.arrival;
-      departureDate = widget.initRidePref?.departureDate ?? DateTime.now();
-      requestedSeats = widget.initRidePref?.requestedSeats ?? 1;
+      departure = widget.initRidePref!.departure;
+      arrival = widget.initRidePref!.arrival;
+      departureDate = widget.initRidePref!.departureDate;
+      requestedSeats = widget.initRidePref!.requestedSeats;
     } else {
+      departure = null;
       departureDate = DateTime.now();
+      arrival = null;
       requestedSeats = 1;
     }
   }
+
 
   // ----------------------------------
   // Handle events
@@ -114,11 +118,16 @@ class _RidePrefFormState extends State<RidePrefForm> {
     });
   }
   // ----------------------------------
-
-  // ----------------------------------
+// ----------------------------------
   // Compute the widgets rendering
   // ----------------------------------
+  String get departureLabel => departure != null ? departure!.name : "From";
+  String get arrivalLabel => arrival != null ? arrival!.name : "To";
 
+  String get numberLabel => requestedSeats.toString();
+  String get dateLabel => DateFormat('EEE dd MMM').format(departureDate);
+
+  bool get switchVisible => arrival != null && departure != null;
   // ----------------------------------
   // Build the widgets
   // ----------------------------------
@@ -204,7 +213,7 @@ Widget build(BuildContext context) {
         BlaButton(
           isPrimary: true,
           text: "Search",
-          enable: true,
+          
           onPressed: () {
             
           },
