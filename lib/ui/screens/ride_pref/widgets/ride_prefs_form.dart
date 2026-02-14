@@ -84,23 +84,20 @@ class _RidePrefFormState extends State<RidePrefForm> {
     }); 
   }
 
-  void openDeparturePicker() {
-    showModalBottomSheet<Location>(
-      context: context,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+  void onDeparturePressed() async {
+    Location? selectedLocation = await Navigator.of(context).push<Location>(
+      MaterialPageRoute(
+        builder: (context) => LocationPicker(selectedLocation: departure),
       ),
-      builder: (context) {
-        return LocationPicker(
-          selectedLocation: departure,
-        );
-      },
-    ).then((location) {
-      if (location != null) {
-        setState(() => departure = location);
-      }
-    });
+    );
+
+    if (selectedLocation != null) {
+      setState(() {
+        departure = selectedLocation;
+      });
+    }
   }
+
 
   void openArrivalPicker() {
     showModalBottomSheet<Location>(
@@ -144,7 +141,7 @@ class _RidePrefFormState extends State<RidePrefForm> {
         RidePrefInput(
           title: departureLabel,
           leftIcon: Icons.location_on,
-          onPressed: () {},
+          onPressed: onDeparturePressed,
           rightIcon: Icons.swap_vert_sharp,
           onRightIconPressed: () {},
         ),
