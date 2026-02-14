@@ -62,13 +62,16 @@ class _RidePrefFormState extends State<RidePrefForm> {
 
   // ----------------------------------
   // Handle events
-  void switchLocations() {
-  setState(() {
-    final temp = departure;
-    departure = arrival;
-    arrival = temp;
-  });
-}
+  void swapLocation() {
+    setState(() {
+      if (departure != null && arrival != null) {
+        Location temp = departure!;
+        departure = arrival;
+        arrival = temp;
+      }
+    });
+  }
+
   void pickDate() {
     showDatePicker(
       context: context,
@@ -139,7 +142,7 @@ class _RidePrefFormState extends State<RidePrefForm> {
           leftIcon: Icons.location_on,
           onPressed: onDeparturePressed,
           rightIcon: Icons.swap_vert_sharp,
-          onRightIconPressed: () {},
+          onRightIconPressed: swapLocation,
         ),
         const BlaDivider(),
 
