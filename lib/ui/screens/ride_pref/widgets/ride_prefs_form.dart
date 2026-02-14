@@ -84,7 +84,7 @@ class _RidePrefFormState extends State<RidePrefForm> {
           departureDate = selectedDate;
         });
       }
-    }); 
+    });
   }
 
   void onDeparturePressed() async {
@@ -158,7 +158,7 @@ class _RidePrefFormState extends State<RidePrefForm> {
         RidePrefInput(
           title: dateLabel,
           leftIcon: Icons.calendar_month,
-          onPressed: () {},
+          onPressed:pickDate,
         ),
         const BlaDivider(),
 
