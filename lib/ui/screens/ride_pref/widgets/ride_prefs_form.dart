@@ -5,6 +5,8 @@ import '../../../../model/ride/locations.dart';
 import '../../../../model/ride_pref/ride_pref.dart';
 import 'package:week_3_blabla_project/ui/widgets/actions/BlaButton.dart';
 import 'package:week_3_blabla_project/ui/widgets/inputs/location_picker.dart';
+import 'package:week_3_blabla_project/ui/screens/ride_pref/widgets/ride_prefs_input.dart';
+import 'package:week_3_blabla_project/ui/widgets/display/bla_divider.dart';
 
 
 ///
@@ -133,94 +135,54 @@ class _RidePrefFormState extends State<RidePrefForm> {
   // ----------------------------------
 
 @override
-Widget build(BuildContext context) {
-  return Padding(
-    padding: const EdgeInsets.all(30),
-    child: Column(
+  Widget build(BuildContext context) {
+    return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.stretch,
-    
       children: [
-        // Departure field
-        
-        TextFormField(
-          decoration: InputDecoration(
-            prefixIcon: Icon(Icons.circle),
-            hintText: departure?.name ?? "Toulouse",
-            border: UnderlineInputBorder(),
-            suffixIcon: IconButton(
-              icon: Icon(Icons.swap_vert_sharp),
-              onPressed: switchLocations,
-            ),
-          ),
-           onTap: openDeparturePicker,
+        //  departure
+        RidePrefInput(
+          title: departureLabel,
+          leftIcon: Icons.location_on,
+          onPressed: () {},
+          rightIcon: Icons.swap_vert_sharp,
+          onRightIconPressed: () {},
         ),
-        SizedBox(height: 15),
-    
-        // Arrival field
-        TextFormField(
-          decoration: InputDecoration(
-            prefixIcon: Icon(Icons.location_on),
-            hintText: arrival?.name ?? "Paris",
-            border: UnderlineInputBorder(),
-          ),
-           onTap: openArrivalPicker,
+        const BlaDivider(),
+
+        // arrival
+        RidePrefInput(
+          title: arrivalLabel,
+          leftIcon: Icons.location_on,
+          onPressed: () {},
         ),
-        SizedBox(height: 15),
-    
-        // Date field
-        TextFormField(
-          decoration: InputDecoration(
-            prefixIcon: Icon(Icons.calendar_today),
-            hintText: DateFormat('EEE dd MMM').format(departureDate),
-            border: UnderlineInputBorder(),
-          ),
-          onTap: () {
-            showDatePicker(
-              context: context,
-              initialDate: departureDate,
-              firstDate: DateTime.now(),
-              lastDate: DateTime.now().add(Duration(days: 365)),
-            ).then((selectedDate) {
-              if (selectedDate != null) {
-                setState(() {
-                  departureDate = selectedDate; 
-                });
-              }
-            });
-          },
+        const BlaDivider(),
+
+        // date
+        RidePrefInput(
+          title: dateLabel,
+          leftIcon: Icons.calendar_month,
+          onPressed: () {},
         ),
-        SizedBox(height: 16),
-    
-        // Seats field
-        TextFormField(
-          decoration: InputDecoration(
-            prefixIcon: Icon(Icons.people),
-            hintText: "5",
-            border: UnderlineInputBorder(),
-          ),
-          keyboardType: TextInputType.number,
-          initialValue: requestedSeats.toString(),
-          onChanged: (value) {
-            setState(() {
-              requestedSeats = int.tryParse(value) ?? 1;
-            });
-          },
+        const BlaDivider(),
+
+        // number of seats
+        RidePrefInput(
+          leftIcon: Icons.person_2_outlined,
+          title: numberLabel,
+          onPressed: () {},
         ),
-        SizedBox(height: 16),
-    
+
+        const BlaDivider(),
+
         // Search button
         BlaButton(
           isPrimary: true,
           text: "Search",
-          
-          onPressed: () {
-            
-          },
+          onPressed: () {},
         ),
       ],
-    ),
-  );
-}
+    );
+  }
 
 }

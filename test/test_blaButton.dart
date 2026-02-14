@@ -51,7 +51,6 @@ class ButtonTestScreen extends StatelessWidget {
 
             BlaButton(
               text: "Disabled Button",
-              enable: false,
               onPressed: () {},
             ),
           ],
